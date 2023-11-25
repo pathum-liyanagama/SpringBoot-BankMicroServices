@@ -13,16 +13,16 @@ public class Customer extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "customer_id")
+    @Column
     private Long customerId;
 
-    @Column(name = "name")
+    @Column
     private String name;
 
-    @Column(name = "email")
+    @Column
     private String email;
 
-    @Column(name = "mobile_number")
+    @Column
     private String mobileNumber;
 
 }
