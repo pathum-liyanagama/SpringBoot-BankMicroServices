@@ -9,18 +9,18 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `created_at` date,
   `created_by` varchar(20),
   `updated_at` date DEFAULT NULL,
-    `updated_by` varchar(20) DEFAULT NULL
+  `updated_by` varchar(20) DEFAULT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `account` (
   `customer_id` int NOT NULL,
-   `account_number` int AUTO_INCREMENT  PRIMARY KEY,
+  `account_number` int AUTO_INCREMENT  PRIMARY KEY,
   `account_type` varchar(100) NOT NULL,
   `branch_address` varchar(200) NOT NULL,
   `created_at` date,
-   `created_by` varchar(20),
-   `updated_at` date DEFAULT NULL,
-    `updated_by` varchar(20) DEFAULT NULL
+  `created_by` varchar(20),
+  `updated_at` date DEFAULT NULL,
+  `updated_by` varchar(20) DEFAULT NULL
 );
 
 INSERT INTO `customer` (`name`,`email`,`mobile_number`,`created_at`, `created_by`)
