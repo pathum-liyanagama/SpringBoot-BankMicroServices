@@ -1,6 +1,3 @@
-DROP TABLE IF EXISTS customer;
-DROP TABLE IF EXISTS accounts;
-
 CREATE TABLE IF NOT EXISTS `customer` (
   `customer_id` int AUTO_INCREMENT  PRIMARY KEY,
   `name` varchar(100) NOT NULL,
