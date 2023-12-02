@@ -15,6 +15,7 @@ import java.time.LocalDate;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Account extends BaseEntity {
 
     @Id
