@@ -49,4 +49,13 @@ public class AccountController {
                 .ok()
                 .body(new ResponseDTO(HttpStatus.NO_CONTENT.value(), ACCOUNT_DELETED));
     }
+
+    @DeleteMapping()
+    public ResponseEntity<ResponseDTO> deleteAccountByMobileNumber(@RequestParam String mobileNumber) {
+        accountService.deleteAccountByMobileNumber(mobileNumber);
+        return ResponseEntity
+                .ok()
+                .body(new ResponseDTO(HttpStatus.NO_CONTENT.value(), ACCOUNT_DELETED));
+    }
+
 }

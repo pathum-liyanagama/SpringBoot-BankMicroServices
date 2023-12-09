@@ -13,4 +13,6 @@ public interface IAccountService {
     void updateAccount(Long accountNumber, AccountDTO accountDTO);
 
     void deleteAccount(Long accountNumber);
+
+    void deleteAccountByMobileNumber(String mobileNumber);
 }

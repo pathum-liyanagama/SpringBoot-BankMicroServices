@@ -84,6 +84,16 @@ public class AccountServiceImpl implements IAccountService {
         accountRepository.deleteById(account.getAccountNumber());
     }
 
+    @Override
+    public void deleteAccountByMobileNumber(String mobileNumber) {
+        Customer customer = customerRepository.findByMobileNumber(mobileNumber)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("customer", "mobileNumber", mobileNumber)
+                );
+
+        accountRepository.deleteByCustomerId(customer.getCustomerId());
+    }
+
     private Long generateAccountNumber() {
         int accNumLength = 10;
         long timestamp = Instant.now().toEpochMilli();
