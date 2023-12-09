@@ -10,7 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static com.pathum.bank.accounts.util.Constants.ACCOUNT_CREATED;
+import static com.pathum.bank.accounts.util.Constants.*;
 
 @RestController
 @RequestMapping(path = "/api/v1/accounts", produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -32,5 +32,21 @@ public class AccountController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(new ResponseDTO(HttpStatus.CREATED.value(), ACCOUNT_CREATED));
+    }
+
+    @PutMapping("/{accountNumber}")
+    public ResponseEntity<ResponseDTO> updateAccount(@PathVariable Long accountNumber, @RequestBody AccountDTO accountDTO) {
+        accountService.updateAccount(accountNumber, accountDTO);
+        return ResponseEntity
+                .ok()
+                .body(new ResponseDTO(HttpStatus.NO_CONTENT.value(), ACCOUNT_UPDATED));
+    }
+
+    @DeleteMapping("/{accountNumber}")
+    public ResponseEntity<ResponseDTO> deleteAccount(@PathVariable Long accountNumber) {
+        accountService.deleteAccount(accountNumber);
+        return ResponseEntity
+                .ok()
+                .body(new ResponseDTO(HttpStatus.NO_CONTENT.value(), ACCOUNT_DELETED));
     }
 }

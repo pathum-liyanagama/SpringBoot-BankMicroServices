@@ -9,4 +9,8 @@ public interface IAccountService {
 
 
     void createAccount(CustomerDTO customerDTO);
+
+    void updateAccount(Long accountNumber, AccountDTO accountDTO);
+
+    void deleteAccount(Long accountNumber);
 }

@@ -64,6 +64,26 @@ public class AccountServiceImpl implements IAccountService {
         accountRepository.save(newAccount);
     }
 
+    public void updateAccount(Long accountNumber, AccountDTO accountDTO) {
+        Account account = accountRepository.findById(accountNumber)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("Account", "accountNumber", String.valueOf(accountNumber))
+                );
+
+        AccountMapper.mapAccountDtoToAccount(accountDTO, account);
+        accountRepository.save(account);
+    }
+
+    @Override
+    public void deleteAccount(Long accountNumber) {
+        Account account = accountRepository.findById(accountNumber)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("Account", "accountNumber", String.valueOf(accountNumber))
+                );
+
+        accountRepository.deleteById(account.getAccountNumber());
+    }
+
     private Long generateAccountNumber() {
         int accNumLength = 10;
         long timestamp = Instant.now().toEpochMilli();
