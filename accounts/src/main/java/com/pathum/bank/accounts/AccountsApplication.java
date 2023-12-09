@@ -2,6 +2,7 @@ package com.pathum.bank.accounts;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -13,10 +14,14 @@ public class AccountsApplication {
 		SpringApplication.run(AccountsApplication.class, args);
 	}
 
-	// To remove null values in Response coming from DTO objects
 	@Bean
 	public ObjectMapper objectMapper() {
-		return new ObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
+		ObjectMapper objectMapper = new ObjectMapper();
+		// To fix InvalidDefinitionException: Java 8 date/time type `java.time.LocalDateTime` not supported by default
+		objectMapper.registerModule(new JavaTimeModule());
+		// To remove null values in Response coming from DTO objects
+		objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+		return objectMapper;
 	}
 
 }
