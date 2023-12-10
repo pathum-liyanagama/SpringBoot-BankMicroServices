@@ -6,6 +6,7 @@ import com.pathum.bank.accounts.dto.ResponseDTO;
 import com.pathum.bank.accounts.service.IAccountService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -48,8 +49,7 @@ public class AccountController {
 
     @PutMapping("/{accountNumber}")
     public ResponseEntity<ResponseDTO> updateAccount(
-            @NotBlank
-            @Pattern(regexp = "(^$|[0-9]{10})", message = "Account number must be 10 digits")
+            @NotNull
             @PathVariable
             Long accountNumber,
             @Valid
@@ -63,8 +63,7 @@ public class AccountController {
 
     @DeleteMapping("/{accountNumber}")
     public ResponseEntity<ResponseDTO> deleteAccount(
-            @NotBlank
-            @Pattern(regexp = "(^$|[0-9]{10})", message = "Account number must be 10 digits")
+            @NotNull
             @PathVariable
             Long accountNumber) {
         accountService.deleteAccount(accountNumber);

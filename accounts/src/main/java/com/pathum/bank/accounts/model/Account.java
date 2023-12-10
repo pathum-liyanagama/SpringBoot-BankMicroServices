@@ -31,7 +31,4 @@ public class Account extends BaseEntity {
     @Column(name = "branch_address")
     private String branchAddress;
 
-    @Column(name = "create_dt")
-    private LocalDate createdDate;
-
 }
