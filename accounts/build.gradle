@@ -28,6 +28,7 @@ dependencies {
 	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
 	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.0'
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.0'
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.projectlombok:lombok'
