@@ -2,8 +2,15 @@ package com.pathum.bank.accounts.controller;
 
 import com.pathum.bank.accounts.dto.AccountDTO;
 import com.pathum.bank.accounts.dto.CustomerDTO;
+import com.pathum.bank.accounts.dto.ErrorResponseDTO;
 import com.pathum.bank.accounts.dto.ResponseDTO;
 import com.pathum.bank.accounts.service.IAccountService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -17,6 +24,10 @@ import org.springframework.web.bind.annotation.*;
 
 import static com.pathum.bank.accounts.util.Constants.*;
 
+@Tag(
+        name = "REST APIs for CRUD Operations related to Accounts",
+        description = "Create, Read, Update and Delete operations for Accounts"
+)
 @RestController
 @RequestMapping(path = "/api/v1/accounts", produces = {MediaType.APPLICATION_JSON_VALUE})
 @AllArgsConstructor // Auto-wiring won't happen with default constructor
@@ -25,6 +36,14 @@ public class AccountController {
 
     private IAccountService accountService;
 
+    @Operation(
+            summary = "Get account details",
+            description = "Get account details using the phone number"
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "HTTP Status OK"
+    )
     @GetMapping()
     public ResponseEntity<AccountDTO> getAccount(
             @NotBlank
@@ -47,6 +66,19 @@ public class AccountController {
                 .body(new ResponseDTO(HttpStatus.CREATED.value(), ACCOUNT_CREATED));
     }
 
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDTO.class)
+                    )
+            )
+    })
     @PutMapping("/{accountNumber}")
     public ResponseEntity<ResponseDTO> updateAccount(
             @NotNull
