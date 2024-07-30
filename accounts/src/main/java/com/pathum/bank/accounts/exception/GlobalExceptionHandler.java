@@ -22,7 +22,8 @@ import java.util.Map;
 import static com.pathum.bank.accounts.util.Constants.INTERNAL_SERVER_ERROR_MSG;
 
 
-@ControllerAdvice
+@ControllerAdvice // if any exception happen it will be handled that in this class
+// extends ResponseEntityExceptionHandler to handle exceptions after request data validation
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -30,7 +31,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponseDTO> handleGlobalException(Exception exception, WebRequest webRequest) {
         ErrorResponseDTO errorResponseDTO = new ErrorResponseDTO(
-                webRequest.getDescription(false),
+                webRequest.getDescription(false), // setting includeClientInfo=false will return only uri details omitting client, session and user details
                 HttpStatus.INTERNAL_SERVER_ERROR,
                 INTERNAL_SERVER_ERROR_MSG,
                 LocalDateTime.now().format(formatter)
@@ -63,7 +64,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(errorResponseDTO, HttpStatus.BAD_REQUEST);
     }
 
-    @Override
+    @Override // the method inside ResponseEntityExceptionHandler
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 

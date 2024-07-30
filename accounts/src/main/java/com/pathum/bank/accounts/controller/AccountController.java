@@ -31,7 +31,7 @@ import static com.pathum.bank.accounts.util.Constants.*;
 @RestController
 @RequestMapping(path = "/api/v1/accounts", produces = {MediaType.APPLICATION_JSON_VALUE})
 @AllArgsConstructor // Auto-wiring won't happen with default constructor
-@Validated
+@Validated // Need to add spring-boot-starter-validation and add required annotations in DTO classes to validate
 public class AccountController {
 
     private IAccountService accountService;

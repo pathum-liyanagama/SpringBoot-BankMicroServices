@@ -13,8 +13,8 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 
     Optional<Account> findByCustomerId(Long customerId);
 
-    @Transactional
-    @Modifying
+    @Transactional // If any exception happen it will rollback all queries inside the caller method
+    @Modifying // State that this custom method is going to modify existing data
     void deleteByCustomerId(Long customerId);
 
 }

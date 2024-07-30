@@ -6,11 +6,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.*;
 
-import java.time.LocalDate;
-
 @Entity
 @Table(name = "Account")
-@Getter
+@Getter // @Data not used because it could create issues HashCode generation methods in Spring Data JPA
 @Setter
 @ToString
 @AllArgsConstructor

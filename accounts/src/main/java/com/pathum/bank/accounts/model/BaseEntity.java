@@ -14,18 +14,18 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
-@MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
+@MappedSuperclass // This class will act as superclass to all entities
+@EntityListeners(AuditingEntityListener.class) // Autofill audit columns like CreatedDate, CreatedBy etc
 @Getter
 @Setter
 @ToString
 public class BaseEntity {
 
-    @CreatedDate
+    @CreatedDate // Automatically add current datetime for audit column createdAt
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    @CreatedBy
+    @CreatedBy // class AuditAwareImpl contains the logic to identify user
     @Column(updatable = false)
     private String createdBy;
 
