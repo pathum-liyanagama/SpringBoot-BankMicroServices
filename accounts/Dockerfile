@@ -1,7 +1,7 @@
-FROM openjdk:17-alpine as build
+FROM openjdk:17-jdk-slim as build
 
 MAINTAINER pathumpml.com
 
-COPY ./build/libs/accounts-0.0.1-SNAPSHOT.jar accounts-0.0.1-SNAPSHOT.jar
+COPY build/libs/*.jar accounts.jar
 
-ENTRYPOINT ["java", "-jar", "/accounts-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "accounts.jar"]
