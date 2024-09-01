@@ -1,5 +1,6 @@
 package com.pathum.bank.accounts.service;
 
+import com.pathum.bank.accounts.configs.AccountBuildConfigs;
 import com.pathum.bank.accounts.dto.AccountDTO;
 import com.pathum.bank.accounts.dto.CustomerDTO;
 import com.pathum.bank.accounts.exception.CustomerAlreadyExistException;
@@ -13,11 +14,15 @@ import com.pathum.bank.accounts.repository.CustomerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
 import java.time.Instant;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 
-import static com.pathum.bank.accounts.util.Constants.*;
+import static com.pathum.bank.accounts.util.Constants.GALLE_BRANCH;
+import static com.pathum.bank.accounts.util.Constants.SAVINGS;
 
 @Service
 @AllArgsConstructor
@@ -25,6 +30,8 @@ public class AccountServiceImpl implements IAccountService {
 
     private AccountRepository accountRepository;
     private CustomerRepository customerRepository;
+    private AccountBuildConfigs accountBuildConfigs;
+
     @Override
     public AccountDTO getAccountDetails(String mobileNumber) {
         Customer customer = customerRepository.findByMobileNumber(mobileNumber)
@@ -92,6 +99,19 @@ public class AccountServiceImpl implements IAccountService {
                 );
 
         accountRepository.deleteByCustomerId(customer.getCustomerId());
+    }
+
+    @Override
+    public Map<String, Object> getBuildDetails() throws IllegalAccessException {
+        Map<String, Object> buildInfo = new HashMap<>();
+
+        Field[] fields = accountBuildConfigs.getClass().getDeclaredFields();
+
+        for (Field field : fields) {
+            field.setAccessible(true); // To access private fields
+            buildInfo.put(field.getName(), field.get(accountBuildConfigs));
+        }
+        return buildInfo;
     }
 
     private Long generateAccountNumber() {

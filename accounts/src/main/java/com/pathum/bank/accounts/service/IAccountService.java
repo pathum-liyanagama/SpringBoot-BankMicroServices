@@ -3,6 +3,8 @@ package com.pathum.bank.accounts.service;
 import com.pathum.bank.accounts.dto.AccountDTO;
 import com.pathum.bank.accounts.dto.CustomerDTO;
 
+import java.util.Map;
+
 public interface IAccountService {
 
     AccountDTO getAccountDetails(String mobileNumber);
@@ -15,4 +17,6 @@ public interface IAccountService {
     void deleteAccount(Long accountNumber);
 
     void deleteAccountByMobileNumber(String mobileNumber);
+
+    Map getBuildDetails() throws IllegalAccessException;
 }

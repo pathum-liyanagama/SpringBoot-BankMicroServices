@@ -22,6 +22,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 import static com.pathum.bank.accounts.util.Constants.*;
 
 @Tag(
@@ -114,6 +116,21 @@ public class AccountController {
         return ResponseEntity
                 .ok()
                 .body(new ResponseDTO(HttpStatus.NO_CONTENT.value(), ACCOUNT_DELETED));
+    }
+
+    @Operation(
+            summary = "Get build details",
+            description = "Get build details about accounts service"
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "HTTP Status OK"
+    )
+    @GetMapping("/buildinfo")
+    public ResponseEntity<Map> getBuildInfo() throws IllegalAccessException {
+        return ResponseEntity
+                .ok()
+                .body(accountService.getBuildDetails());
     }
 
 }
