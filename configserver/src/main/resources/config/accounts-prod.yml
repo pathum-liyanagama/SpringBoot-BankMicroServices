@@ -1,0 +1,10 @@
+spring:
+  config:
+    activate:
+      on-profile: "prod"
+
+accounts:
+  env: prod
+  version: 1.0.0
+  contact-person: Kalpana
+  email: kalpana@gmail.com

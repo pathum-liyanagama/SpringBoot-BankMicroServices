@@ -1,0 +1,10 @@
+spring:
+  config:
+    activate:
+      on-profile: "dev"
+
+accounts:
+  env: dev
+  version: 1.0.0
+  contact-person: Pasan
+  email: pasan@gmail.com

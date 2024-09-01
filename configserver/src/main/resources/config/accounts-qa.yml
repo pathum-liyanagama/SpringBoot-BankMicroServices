@@ -1,0 +1,10 @@
+spring:
+  config:
+    activate:
+      on-profile: "qa"
+
+accounts:
+  env: qa
+  version: 1.0.0
+  contact-person: Pathum
+  email: pathum@gmail.com
